@@ -1,8 +1,8 @@
-package Level2Ex1;
+package Level2;
 
 import java.util.Objects;
 
-public class Restaurant {
+public class Restaurant implements Comparable<Restaurant> {
 
     private String name;
     private int rating;
@@ -35,6 +35,19 @@ public class Restaurant {
 
     @Override
     public String toString() {
-        return "Restaurant: " + name + ". Rating: " + rating;
+        return "Name: " + name + ", Rating: " + rating;
+    }
+
+    @Override
+    public int compareTo(Restaurant other) {
+        int comparison = name.compareToIgnoreCase(other.getName());
+        if (comparison == 0) {
+            if (rating < other.getRating()) {
+                return 1;
+            } else if (rating > other.getRating()) {
+                return -1;
+            }
+        }
+        return comparison;
     }
 }
