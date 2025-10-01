@@ -33,6 +33,7 @@ public class Main {
 
         // hashset of months
         HashSet<Month> monthsSet = new HashSet<>(months);
+        monthsSet.add(new Month("January"));
         for (Month m : monthsSet) {
             System.out.println(m.getName());
         }
