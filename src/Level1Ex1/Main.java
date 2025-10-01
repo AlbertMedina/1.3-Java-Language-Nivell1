@@ -32,9 +32,11 @@ public class Main {
         System.out.println();
 
         // hashset of months
-        HashSet<Month> monthsSet = new HashSet<>(months);
-        monthsSet.add(new Month("January"));
-        for (Month m : monthsSet) {
+        HashSet<Month> monthsHashSet = new HashSet<>(months);
+        monthsHashSet.add(new Month("January"));
+        monthsHashSet.add(new Month("january"));
+        monthsHashSet.add(new Month("JANUARY"));
+        for (Month m : monthsHashSet) {
             System.out.println(m.getName());
         }
 
