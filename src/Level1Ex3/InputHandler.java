@@ -17,7 +17,7 @@ public class InputHandler {
                 if (input.isEmpty()) {
                     throw new Exception("Format error");
                 }
-                return input;
+                return input.trim();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

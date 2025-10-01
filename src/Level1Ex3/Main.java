@@ -1,14 +1,13 @@
 package Level1Ex3;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Main {
 
     private static final String COUNTRIES_FILE_PATH = "resources/countries.txt";
+    private static final String SCOREBOARD_FILE_PATH = "resources/scoreboard.txt";
     private static final int NUMBER_OF_ROUNDS = 10;
 
     private static HashMap<String, String> countriesCapitals = new HashMap<>();
@@ -67,6 +66,12 @@ public class Main {
     }
 
     private static void savePlayerFinalScore(String playerName, int finalScore) {
-
+        try (FileWriter fw = new FileWriter(SCOREBOARD_FILE_PATH, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter pw = new PrintWriter(bw)) {
+            pw.println(playerName.replace(" ", "_") + " " + finalScore);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
