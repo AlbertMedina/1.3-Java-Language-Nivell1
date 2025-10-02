@@ -8,20 +8,20 @@ public class Person {
 
     public Person(String name, String surname, String dni) {
 
-        if (name == null || name.trim().isEmpty()) {
+        if (!isNameOrSurnameValid(name)) {
             throw new IllegalArgumentException("Invalid name");
         }
 
-        if (surname == null || surname.trim().isEmpty()) {
+        if (!isNameOrSurnameValid(surname)) {
             throw new IllegalArgumentException("Invalid surname");
         }
 
-        if (dni == null || dni.trim().isEmpty()) {
+        if (!isDniValid(dni)) {
             throw new IllegalArgumentException("Invalid DNI");
         }
 
-        this.name = name;
-        this.surname = surname;
+        this.name = capitalizeNameSurname(name);
+        this.surname = capitalizeNameSurname(surname);
         this.dni = dni.toUpperCase();
     }
 
@@ -37,6 +37,13 @@ public class Person {
         return dni;
     }
 
+    private boolean isNameOrSurnameValid(String text) {
+        if (text == null || text.trim().isEmpty()) {
+            return false;
+        }
+        return !text.matches(".*\\d.*");
+    }
+
     private boolean isDniValid(String dni) {
         if (dni == null || dni.trim().isEmpty()) {
             return false;
@@ -50,5 +57,22 @@ public class Person {
             }
         }
         return Character.isLetter(dni.charAt(dni.length() - 1));
+    }
+
+    public static String capitalizeNameSurname(String text) {
+        if (text == null || text.isEmpty()) {
+            return text;
+        }
+
+        String[] words = text.toLowerCase().split("\\s+");
+        StringBuilder sb = new StringBuilder();
+
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                sb.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1)).append(" ");
+            }
+        }
+
+        return sb.toString().trim();
     }
 }
