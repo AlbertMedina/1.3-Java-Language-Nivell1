@@ -3,6 +3,7 @@ package Level2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,7 +27,7 @@ public class Main {
 
         System.out.println();
 
-        ArrayList<Restaurant> restaurantsList = new ArrayList<>(restaurants);
+        List<Restaurant> restaurantsList = new ArrayList<>(restaurants);
         Collections.sort(restaurantsList);
 
         System.out.println("Ordered list:");

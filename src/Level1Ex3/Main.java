@@ -3,6 +3,7 @@ package Level1Ex3;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main {
 
@@ -46,7 +47,7 @@ public class Main {
     }
 
     private static int playGame() {
-        ArrayList<String> keys = new ArrayList<>(countriesCapitals.keySet());
+        List<String> keys = new ArrayList<>(countriesCapitals.keySet());
         int score = 0;
         for (int i = 1; i <= NUMBER_OF_ROUNDS; ++i) {
             String country = keys.get((int) (Math.random() * countriesCapitals.size()));
