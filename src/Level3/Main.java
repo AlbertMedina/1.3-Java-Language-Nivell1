@@ -101,10 +101,15 @@ public class Main {
             String name = InputHandler.readString("Enter name");
             String surname = InputHandler.readString("Enter surname");
             String dni = InputHandler.readString("Enter DNI");
+            if (persons.stream().anyMatch(p -> p.getDni().equalsIgnoreCase(dni))) {
+                throw new Exception("We already have a person with this DNI in the list");
+            }
             persons.add(new Person(name, surname, dni));
             System.out.println("Person added successfully.");
         } catch (IllegalArgumentException e) {
             System.out.println("Error adding person: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
