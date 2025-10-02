@@ -9,9 +9,13 @@ import java.util.List;
 
 public class Main {
 
+    private static final String PERSONS_FILE_PATH = "resources/persons.csv";
+
     private static List<Person> persons = new ArrayList<>();
 
     public static void main(String[] args) {
+
+        initialize();
 
         System.out.println("Welcome!");
         System.out.println();
@@ -61,6 +65,24 @@ public class Main {
         InputHandler.closeScanner();
     }
 
+    private static void initialize() {
+        try (BufferedReader br = new BufferedReader(new FileReader(PERSONS_FILE_PATH))) {
+            String line = br.readLine();
+            while (line != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3) {
+                    String name = parts[0].trim();
+                    String surname = parts[1].trim();
+                    String dni = parts[2].trim();
+                    persons.add(new Person(name, surname, dni));
+                }
+                line = br.readLine();
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private static int menu() {
         System.out.println("We can do the following:");
         System.out.println("1. Add person");
@@ -87,7 +109,7 @@ public class Main {
     }
 
     private static void showPersonsList() {
-        System.out.println("__NAME__  __SURNAME__  __DNI__");
+        System.out.println("___NAME___  ____SURNAME____  ___DNI___");
         for (Person p : persons) {
             System.out.println(p.getName() + "    " + p.getSurname() + "    " + p.getDni());
         }
