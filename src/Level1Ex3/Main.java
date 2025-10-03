@@ -1,5 +1,7 @@
 package Level1Ex3;
 
+import Utils.InputHandler;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +29,8 @@ public class Main {
         } else {
             System.out.println("Something went wrong. No capital cities to guess...");
         }
+
+        InputHandler.closeScanner();
     }
 
     private static void initialize() {

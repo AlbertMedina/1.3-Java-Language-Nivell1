@@ -1,4 +1,4 @@
-package Level1Ex3;
+package Utils;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,6 +8,20 @@ public class InputHandler {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public InputHandler() {
+    }
+
+    public static int readInt(String message) {
+        while (true) {
+            System.out.print(message + ": ");
+            try {
+                int input = SCANNER.nextInt();
+                SCANNER.nextLine();
+                return input;
+            } catch (InputMismatchException e) {
+                System.out.println("Format error.");
+                SCANNER.nextLine();
+            }
+        }
     }
 
     public static String readString(String message) {
@@ -23,5 +37,9 @@ public class InputHandler {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public static void closeScanner() {
+        SCANNER.close();
     }
 }
