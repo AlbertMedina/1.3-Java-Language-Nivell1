@@ -8,11 +8,11 @@ public class Person {
 
     public Person(String name, String surname, String dni) {
 
-        if (!isNameOrSurnameValid(name)) {
+        if (!isNameValid(name)) {
             throw new IllegalArgumentException("Invalid name");
         }
 
-        if (!isNameOrSurnameValid(surname)) {
+        if (!isNameValid(surname)) {
             throw new IllegalArgumentException("Invalid surname");
         }
 
@@ -20,8 +20,8 @@ public class Person {
             throw new IllegalArgumentException("Invalid DNI");
         }
 
-        this.name = capitalizeNameSurname(name);
-        this.surname = capitalizeNameSurname(surname);
+        this.name = capitalizeWords(name);
+        this.surname = capitalizeWords(surname);
         this.dni = dni.toUpperCase();
     }
 
@@ -37,7 +37,7 @@ public class Person {
         return dni;
     }
 
-    private boolean isNameOrSurnameValid(String text) {
+    private boolean isNameValid(String text) {
         if (text == null || text.trim().isEmpty()) {
             return false;
         }
@@ -59,7 +59,7 @@ public class Person {
         return Character.isLetter(dni.charAt(dni.length() - 1));
     }
 
-    public static String capitalizeNameSurname(String text) {
+    public static String capitalizeWords(String text) {
         if (text == null || text.isEmpty()) {
             return text;
         }
