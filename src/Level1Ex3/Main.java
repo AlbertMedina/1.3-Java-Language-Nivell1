@@ -71,9 +71,7 @@ public class Main {
     }
 
     private static void savePlayerFinalScore(String playerName, int finalScore) {
-        try (FileWriter fw = new FileWriter(SCOREBOARD_FILE_PATH, true);
-             BufferedWriter bw = new BufferedWriter(fw);
-             PrintWriter pw = new PrintWriter(bw)) {
+        try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(SCOREBOARD_FILE_PATH, true)))) {
             pw.println(playerName.replace(" ", "_") + " " + finalScore);
         } catch (IOException e) {
             System.out.println(e.getMessage());
