@@ -25,8 +25,8 @@ public class Month {
         if (other == null || getClass() != other.getClass()) {
             return false;
         }
-        Month otherMyMonth = (Month) other;
-        return name.equalsIgnoreCase(otherMyMonth.getName());
+        Month otherMonth = (Month) other;
+        return name.equalsIgnoreCase(otherMonth.getName());
     }
 
     @Override
