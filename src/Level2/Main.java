@@ -10,15 +10,15 @@ public class Main {
 
         HashSet<Restaurant> restaurants = new HashSet<>();
 
-        restaurants.add(new Restaurant("El Celler de Can Roca", 5));
-        restaurants.add(new Restaurant("El Celler de Can Roca", 4));
-        restaurants.add(new Restaurant("Cinc Sentits", 5));
-        restaurants.add(new Restaurant("CINC SENTITS", 5));
-        restaurants.add(new Restaurant("cinc sentits", 4));
-        restaurants.add(new Restaurant("Disfrutar", 3));
-        restaurants.add(new Restaurant("Disfrutar", 3));
-        restaurants.add(new Restaurant("Abac", 4));
-        restaurants.add(new Restaurant("Abac", 3));
+        addRestaurant(restaurants, "El Celler de Can Roca", 5);
+        addRestaurant(restaurants, "El Celler de Can Roca", 4);
+        addRestaurant(restaurants, "Cinc Sentits", 5);
+        addRestaurant(restaurants, "CINC SENTITS", 5);
+        addRestaurant(restaurants, "cinc sentits", 4);
+        addRestaurant(restaurants, "Disfrutar", 3);
+        addRestaurant(restaurants, "Disfrutar", 3);
+        addRestaurant(restaurants, "Abac", 4);
+        addRestaurant(restaurants, "abac", 3);
 
         System.out.println("HashSet restaurants:");
         for (Restaurant r : restaurants) {
@@ -33,6 +33,14 @@ public class Main {
         System.out.println("Ordered list:");
         for (Restaurant r : restaurantsList) {
             System.out.println(r);
+        }
+    }
+
+    private static void addRestaurant(HashSet<Restaurant> restaurants, String name, int rating) {
+        try {
+            restaurants.add(new Restaurant(name, rating));
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error adding restaurant: " + e.getMessage());
         }
     }
 }

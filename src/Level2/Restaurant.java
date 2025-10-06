@@ -8,7 +8,16 @@ public class Restaurant implements Comparable<Restaurant> {
     private int rating;
 
     public Restaurant(String name, int rating) {
-        this.name = name;
+        
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Invalid name");
+        }
+
+        if (rating < 0) {
+            throw new IllegalArgumentException("Invalid rating");
+        }
+
+        this.name = name.trim();
         this.rating = rating;
     }
 
