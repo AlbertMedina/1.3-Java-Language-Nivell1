@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class PersonService {
 
-    private PersonRepository personRepository;
+    private final PersonRepository personRepository;
 
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
@@ -25,12 +25,6 @@ public class PersonService {
             System.out.println("Person added successfully.");
         } catch (Exception e) {
             System.out.println("Error adding person: " + e.getMessage());
-        }
-    }
-
-    public void showPersons() {
-        for (Person p : personRepository.getPersons()) {
-            System.out.println(p.getName());
         }
     }
 
@@ -55,6 +49,13 @@ public class PersonService {
             personRepository.sortPersons(Comparator.comparing(Person::getDni));
         } else {
             personRepository.sortPersons(Comparator.comparing(Person::getDni).reversed());
+        }
+    }
+
+    public void showPersons() {
+        System.out.println("___NAME___  ____SURNAME____  ___DNI___");
+        for (Person p : personRepository.getPersons()) {
+            System.out.println(p.getName() + "    " + p.getSurname() + "    " + p.getDni());
         }
     }
 }
