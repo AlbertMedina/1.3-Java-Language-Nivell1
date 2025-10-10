@@ -1,46 +1,27 @@
 package Level2;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
 
-        HashSet<Restaurant> restaurants = new HashSet<>();
+        RestaurantRepository restaurantRepository = new RestaurantRepository();
+        RestaurantService restaurantService = new RestaurantService(restaurantRepository);
 
-        addRestaurant(restaurants, "El Celler de Can Roca", 5);
-        addRestaurant(restaurants, "El Celler de Can Roca", 4);
-        addRestaurant(restaurants, "Cinc Sentits", 5);
-        addRestaurant(restaurants, "CINC SENTITS", 5);
-        addRestaurant(restaurants, "cinc sentits", 4);
-        addRestaurant(restaurants, "Disfrutar", 3);
-        addRestaurant(restaurants, "Disfrutar", 3);
-        addRestaurant(restaurants, "Abac", 4);
-        addRestaurant(restaurants, "abac", 3);
+        restaurantService.addRestaurant("El Celler de Can Roca", 5);
+        restaurantService.addRestaurant("El Celler de Can Roca", 4);
+        restaurantService.addRestaurant("Cinc Sentits", 5);
+        restaurantService.addRestaurant("CINC SENTITS", 5);
+        restaurantService.addRestaurant("cinc sentits", 4);
+        restaurantService.addRestaurant("Disfrutar", 3);
+        restaurantService.addRestaurant("Disfrutar", 3);
+        restaurantService.addRestaurant("Abac", 4);
+        restaurantService.addRestaurant("abac", 3);
 
-        System.out.println("HashSet restaurants:");
-        for (Restaurant r : restaurants) {
-            System.out.println(r);
-        }
+        System.out.println("Restaurants:");
+        restaurantService.showRestaurants();
 
         System.out.println();
 
-        List<Restaurant> restaurantsList = new ArrayList<>(restaurants);
-        Collections.sort(restaurantsList);
-
-        System.out.println("Ordered list:");
-        for (Restaurant r : restaurantsList) {
-            System.out.println(r);
-        }
-    }
-
-    private static void addRestaurant(HashSet<Restaurant> restaurants, String name, int rating) {
-        try {
-            restaurants.add(new Restaurant(name, rating));
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error adding restaurant: " + e.getMessage());
-        }
+        System.out.println("Restaurants sorted:");
+        restaurantService.showRestaurantsSorted();
     }
 }
