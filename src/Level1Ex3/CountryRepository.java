@@ -3,13 +3,16 @@ package Level1Ex3;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class CountryRepository {
 
     private static final String COUNTRIES_FILE_PATH = "resources/countries.txt";
 
     private HashMap<String, String> countriesCapitals;
+    private List<String> countries;
 
     public CountryRepository() {
         initialize();
@@ -17,6 +20,10 @@ public class CountryRepository {
 
     public HashMap<String, String> getCountriesCapitals() {
         return countriesCapitals;
+    }
+
+    public List<String> getCountries() {
+        return countries;
     }
 
     private void initialize() {
@@ -32,6 +39,7 @@ public class CountryRepository {
                 }
                 line = br.readLine();
             }
+            countries = new ArrayList<>(countriesCapitals.keySet());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
