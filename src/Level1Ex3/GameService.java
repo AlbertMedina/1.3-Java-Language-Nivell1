@@ -2,6 +2,8 @@ package Level1Ex3;
 
 import Utils.InputHandler;
 
+import java.util.List;
+
 public class GameService {
 
     private static final int NUMBER_OF_ROUNDS = 10;
@@ -20,6 +22,7 @@ public class GameService {
         int score = 0;
         for (int i = 1; i <= NUMBER_OF_ROUNDS; ++i) {
             score += playRound(i);
+            System.out.println();
         }
         InputHandler.closeScanner();
 
@@ -36,26 +39,38 @@ public class GameService {
 
     private int playRound(int roundNum) {
         System.out.println("Round " + roundNum);
-        String country = getRandomCountry();
-        String response = askForCapitalCity(country);
-        return checkResponse(country, response);
+        Question question = getRandomQuestion();
+        String response = askForCapitalCity(question.getCountry());
+        RoundResult result = checkResponse(question, response);
+        return getRoundScore(result);
     }
 
-    private String getRandomCountry() {
-        return countryRepository.getCountries().get((int) (Math.random() * countryRepository.getCountriesCapitals().size()));
+    private Question getRandomQuestion() {
+        List<String> countries = countryRepository.getCountries();
+        String country = countries.get((int) (Math.random() * countries.size()));
+        String capital = countryRepository.getCountriesCapitals().get(country);
+        return new Question(country, capital);
     }
 
     private String askForCapitalCity(String country) {
         return InputHandler.readString("Enter the capital city of " + country);
     }
 
-    private int checkResponse(String country, String response) {
-        int score = 0;
-        if (response.equalsIgnoreCase(countryRepository.getCountriesCapitals().get(country))) {
-            System.out.println("Yes! You get " + MAX_POINTS_PER_ROUND + (MAX_POINTS_PER_ROUND == 1 ? " point." : " points."));
-            score = MAX_POINTS_PER_ROUND;
+    private RoundResult checkResponse(Question question, String response) {
+        RoundResult result = new RoundResult(question, response);
+        if (result.isCorrect()) {
+            System.out.println("Yes! Correct answer!");
         } else {
-            System.out.println("No! The correct answer was " + countryRepository.getCountriesCapitals().get(country));
+            System.out.println("No! The correct answer was " + question.getCapital());
+        }
+        return result;
+    }
+
+    private int getRoundScore(RoundResult result) {
+        int score = 0;
+        if (result.isCorrect()) {
+            score = MAX_POINTS_PER_ROUND;
+            System.out.println("You get " + MAX_POINTS_PER_ROUND + (MAX_POINTS_PER_ROUND == 1 ? " point." : " points."));
         }
         return score;
     }
